@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Employee List{% endblock %}
+{% load static %}
+{% block content %}
+
+ <style>
+    .row{
+      margin: 5px;
+    }
+  
+  </style>
+
+<center>
+  <h2>Edit Employee</h2>
+</center>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <form action="editemployee2/{{obj.id}}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row">
+          <div class="col">
+            <label for="inputAddress">First Name</label>
+            <input name="firstname" value="{{obj.firstname}}" type="text" class="form-control" placeholder="First Name"
+              required>
+          </div>
+
+          <div class="col">
+            <label for="inputAddress">Last Name</label>
+            <input name="lastname" value="{{obj.lastname}}" type="text" class="form-control" placeholder="Last Name"
+              required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="inputAddress">Email</label>
+            <input name="email" value="{{obj.email}}" type="email" class="form-control" placeholder="Email" required>
+          </div>
+          <div class="col">
+            <label for="inputAddress">Phone Number</label>
+            <input name="phonenumber" value="{{obj.phonenumber}}" type="number" class="form-control"
+              placeholder="Phone Number" required>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <label for="inputAddress">Address</label>
+            <input name="address" value="{{obj.address}}" type="text" class="form-control" id="inputAddress"
+              placeholder="Address" required>
+          </div>
+          <div class="col">
+            <label for="maritalstatus">Marital Status</label>
+            <select name="maritalstatus" id="maritalstatus" class="form-control" required>
+              <option {% if obj.maritalstatus == 'MARRIED' %} selected {% endif %} value="MARRIED">Married</option>
+              <option {% if obj.maritalstatus == 'SINGLE' %} selected {% endif %} value="SINGLE">Single</option>
+              <option {% if obj.maritalstatus == 'DIVORCED' %} selected {% endif %} value="DIVORCED">Divorced</option>
+              <option {% if obj.maritalstatus == 'WIDOWED' %} selected {% endif %} value="WIDOWED">Widowed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="qualifications">Qualification</label>
+            <select name="qualifications" id="qualifications" class="form-control" required>
+              <option {% if obj.qualifications == 'BSC' %} selected {% endif %} value="BSC">BSC</option>
+              <option {% if obj.qualifications == 'MSC' %} selected {% endif %} value="MSC">MSC</option>
+              <option {% if obj.qualifications == 'BCA' %} selected {% endif %} value="BCA">BCA</option>
+              <option {% if obj.qualifications == 'MCA' %} selected {% endif %} value="MCA">MCA</option>
+              <option {% if obj.qualifications == 'BTECH' %} selected {% endif %} value="BTECH">BTECH</option>
+              <option {% if obj.qualifications == 'MTECH' %} selected {% endif %} value="MTECH">MTECH</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="dateofbirth">Date of Birth</label>
+            <input name="dateofbirth" value="{{ obj.dateofbirth|date:'Y-m-d' }}" type="date" class="form-control"
+              placeholder="Date of Birth">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <label for="inputAddress">Gender</label>
+            <select name="gender" id="inputState" class="form-control" required>
+                <option {% if obj.gender == 'MALE' %} selected {% endif %} value="MALE">Male</option>
+                <option {% if obj.gender == 'FEMALE' %} selected {% endif %} value="FEMALE">Female</option>
+                <option {% if obj.gender == 'OTHERS' %} selected {% endif %} value="OTHERS">Others</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="interests">Interests</label>
+            <select name="interests" id="inputState" class="form-control" required>
+              <option {% if obj.interests == 'INTERESTED' %} selected {% endif %} value="INTERESTED">INTERESTED</option>
+                <option {% if obj.interests == 'NOTINTERESTED' %} selected {% endif %} value="NOTINTERESTED">NOTINTERESTED</option>
+                <option {% if obj.interests == 'UNDECIDED' %} selected {% endif %} value="UNDECIDED">UNDECIDED</option>
+          </select>
+          </div>
+        </div>
+        
+        <br><br>
+        
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-3">
+            <button type="submit" class="btn btn-success col-12">Save Editing</button>
+          </div>
+          <div class="col-3">
+            <a href="{% url 'index' %}"><button type="button" class="btn btn-danger col-12">Cancel</button></a>
+          </div>
+
+          <div class="col-3"></div>
+        </div>
+
+    </div>
+    </form>
+  </div>
+</div>
+</div>
+{% endblock %}

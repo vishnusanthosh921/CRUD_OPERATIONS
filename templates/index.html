@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Employee List{% endblock %}
+
+{% block content %}
+
+<script>
+$( document ).ready(function() {
+    $( ".interest" ).each(function() {
+        var cur_elem = $( this );
+        console.log(cur_elem[0].innerHTML)
+        if(cur_elem[0].innerHTML=='INTERESTED'){
+            cur_elem.css('color','green');
+        }
+        else if(cur_elem[0].innerHTML=='NOTINTERESTED'){
+            cur_elem.css('color','red');
+        }     
+        else if(cur_elem[0].innerHTML=='UNDECIDED'){
+            cur_elem.css('color','orange');
+        }            
+    });
+});
+</script>
+
+
+<div class="d-flex justify-content-center">
+    <div class="container border-box">
+        <div id="main_page" class="scrollable-container content"
+            style="max-height: 500px; overflow-y: auto; overflow-x: hidden;">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th colspan="11">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h2><b>Employee Details</b></h2>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="addemployee" class="btn btn-success" type="submit"
+                                        style="float: right;"><span class="glyphicon">&#x2b;</span> <span>Add
+                                            Employee</span></a>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Qualifications</th>
+                        <th>Gender</th>
+                        <th>Date of Birth</th>
+                        <th>Marital Status</th>
+                        <th>Interests</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in obj %}
+                    <tr>
+                        <td>{{ i.firstname }}</td>
+                        <td>{{ i.lastname }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.address }}</td>
+                        <td>{{ i.phonenumber }}</td>
+                        <td>{{ i.qualifications }}</td>
+                        <td>{{ i.gender }}</td>
+                        <td>{{ i.dateofbirth }}</td>
+                        <td>{{ i.maritalstatus }}</td>
+                        <td class="interest" value="{{i.interests}}">{{ i.interests }}</td>
+                        <td>
+                            <a href="editemployee/{{i.id}}" class="edit">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                </i></a>
+                            <a href="deleteemployee/{{i.id}}" class="delete">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
